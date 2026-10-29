@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f8f9f5" />
+  <title>Fiza Batool — Interactive Professional CV</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --page: #f8f9f6;
+      --surface: #ffffff;
+      --hero: #f2f5f0;
+      --ink: #202a27;
+      --muted: #63736d;
+      --soft: #82938a;
+      --green: #748f7b;
+      --green-dark: #617c69;
+      --green-pale: #e6eee7;
+      --line: #e0e6df;
+      --shadow: 0 8px 28px rgba(42, 61, 49, .035);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--page);
+      font-family: "DM Sans", Arial, sans-serif;
+      font-size: 14px;
+    }
+
+    button, a { font: inherit; }
+    a { color: inherit; text-decoration: none; }
+    button { cursor: pointer; }
+
+    .site-header {
+      min-height: 68px;
+      padding: 12px 30px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 22px;
+      background: rgba(255,255,255,.72);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .identity, .header-actions, .contact-pill, .brand-name {
+      display: flex;
+      align-items: center;
+    }
+
+    .identity { gap: 14px; min-width: 0; }
+    .monogram {
+      width: 40px;
+      height: 40px;
+      flex: 0 0 40px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--green);
+      color: white;
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: 17px;
+      font-weight: 600;
+    }
+
+    .brand-name {
+      gap: 14px;
+      white-space: nowrap;
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: 20px;
+    }
+
+    .brand-name::after {
+      content: "";
+      width: 1px;
+      height: 25px;
+      background: var(--line);
+    }
+
+    .role-line {
+      color: var(--muted);
+      font-size: 14px;
+      white-space: nowrap;
+    }
+
+    .role-line .dot { color: #cbd4cb; padding: 0 8px; }
+
+    .header-actions { gap: 12px; }
+    .contact-pill {
+      min-height: 36px;
+      gap: 8px;
+      padding: 0 13px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: #fff;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+    .contact-pill svg { width: 16px; height: 16px; color: var(--green-dark); }
+    .location-pill { background: #f3f6f2; border-color: #e8eee7; }
+    .resume-btn {
+      min-height: 36px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 0 17px;
+      border: 0;
+      border-radius: 999px;
+      background: var(--green);
+      color: white;
+      font-weight: 600;
+      transition: background .2s, transform .2s;
+      white-space: nowrap;
+    }
+    .resume-btn:hover { background: var(--green-dark); transform: translateY(-1px); }
+    .resume-btn svg { width: 16px; height: 16px; }
+
+    main {
+      max-width: 1600px;
+      margin: 0 auto;
+      padding: 15px 30px 12px;
+    }
+
+    .cv-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.43fr) minmax(360px, 1fr);
+      gap: 25px;
+      align-items: stretch;
+    }
+
+    .intro-card {
+      min-height: 570px;
+      padding: 36px 31px 27px;
+      border: 1px solid var(--line);
+      border-radius: 21px;
+      background: var(--hero);
+      display: flex;
+      flex-direction: column;
+      box-shadow: var(--shadow);
+    }
+
+    .status-badge {
+      align-self: flex-start;
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 7px 13px;
+      border-radius: 999px;
+      background: #e7eee7;
+      color: #26352e;
+      font-size: 13px;
+      margin-bottom: 13px;
+    }
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--green);
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 780px;
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: clamp(34px, 3.15vw, 49px);
+      line-height: 1.09;
+      letter-spacing: -1.4px;
+      font-weight: 500;
+    }
+    h1 em {
+      display: block;
+      color: var(--green);
+      font-weight: 500;
+    }
+
+    .intro-copy {
+      max-width: 760px;
+      margin: 19px 0 20px;
+      color: #566760;
+      font-size: 17px;
+      line-height: 1.68;
+    }
+
+    .divider { height: 1px; background: var(--line); width: 100%; }
+    .eyebrow {
+      margin: 17px 0 12px;
+      color: #64766c;
+      font-family: "DM Mono", monospace;
+      font-size: 11px;
+      letter-spacing: 1.25px;
+      text-transform: uppercase;
+    }
+
+    .software-grid {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 10px;
+    }
+    .software-card {
+      min-height: 80px;
+      padding: 10px 4px 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      background: rgba(255,255,255,.93);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      text-align: center;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .software-card:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+    .software-icon {
+      width: 32px;
+      height: 32px;
+      display: grid;
+      place-items: center;
+      border-radius: 9px;
+      color: white;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: -.5px;
+    }
+    .excel { background: #07996b; }
+    .word { background: #2867ed; }
+    .powerpoint { background: #df4927; }
+    .quickbooks { background: #25a51c; font-size: 11px; }
+    .caseware { background: #08619b; }
+    .erp { background: #5a3ba4; font-size: 12px; }
+    .software-name { color: #17221d; font-size: 12px; font-weight: 600; }
+
+    .action-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: auto;
+      padding-top: 18px;
+    }
+    .primary-action, .secondary-action {
+      min-height: 42px;
+      padding: 0 19px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      border-radius: 15px;
+      border: 1px solid var(--line);
+      transition: transform .2s, background .2s;
+      font-weight: 600;
+    }
+    .primary-action { background: var(--green); color: white; border-color: var(--green); }
+    .primary-action:hover { background: var(--green-dark); transform: translateY(-1px); }
+    .secondary-action { background: white; color: #26332d; }
+    .secondary-action:hover { background: #f8faf7; transform: translateY(-1px); }
+    .primary-action svg { width: 16px; height: 16px; }
+    .typing-speed {
+      margin-left: auto;
+      color: #6f8176;
+      font-family: "DM Mono", monospace;
+      font-size: 12px;
+      white-space: nowrap;
+    }
+    .typing-speed strong { color: #25342c; font-family: "DM Sans", sans-serif; font-size: 13px; }
+
+    .metrics {
+      display: grid;
+      grid-template-rows: repeat(4, minmax(0, 1fr));
+      gap: 24px;
+    }
+    .metric-card {
+      min-height: 120px;
+      padding: 18px;
+      display: grid;
+      grid-template-columns: 48px minmax(0, 1fr);
+      gap: 16px;
+      align-items: start;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: var(--surface);
+      box-shadow: var(--shadow);
+      transition: transform .2s, border-color .2s;
+    }
+    .metric-card:hover { transform: translateY(-2px); border-color: #cbd8cd; }
+    .metric-icon {
+      width: 46px;
+      height: 46px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      background: #dfe9df;
+      color: var(--green-dark);
+    }
+    .metric-icon svg { width: 24px; height: 24px; }
+    .metric-content { min-width: 0; }
+    .metric-top {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 5px;
+    }
+    .metric-top h2 {
+      margin: 0;
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: 25px;
+      line-height: 1.1;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .metric-label {
+      color: #718b79;
+      font-family: "DM Mono", monospace;
+      font-size: 10px;
+      letter-spacing: .5px;
+      text-transform: uppercase;
+      text-align: right;
+    }
+    .metric-description { margin: 0 0 3px; color: #506159; font-size: 14px; line-height: 1.4; }
+    .metric-detail { margin: 0; color: #89968f; font-size: 13px; line-height: 1.45; }
+
+    footer {
+      min-height: 39px;
+      padding: 9px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      border-top: 1px solid var(--line);
+      color: #7c8a82;
+      background: rgba(255,255,255,.4);
+      font-size: 12px;
+    }
+    .footer-brand { color: #27362d; font-family: "Playfair Display", Georgia, serif; font-weight: 600; }
+    .footer-note { font-family: "DM Mono", monospace; font-size: 10px; letter-spacing: .2px; text-align: right; }
+
+    /* Details appear inline in a dialog; no tabs or additional pages are used. */
+    dialog {
+      width: min(560px, calc(100% - 32px));
+      padding: 0;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      color: var(--ink);
+      background: var(--surface);
+      box-shadow: 0 25px 80px rgba(23, 43, 31, .22);
+    }
+    dialog::backdrop { background: rgba(22, 34, 27, .38); backdrop-filter: blur(3px); }
+    .dialog-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 22px 24px 16px;
+      border-bottom: 1px solid var(--line);
+    }
+    .dialog-head h2 { margin: 0; font: 600 25px "Playfair Display", Georgia, serif; }
+    .dialog-head p { margin: 6px 0 0; color: var(--muted); line-height: 1.5; }
+    .close-btn {
+      width: 34px; height: 34px; border: 1px solid var(--line); border-radius: 50%;
+      background: #f7f9f6; color: var(--ink); font-size: 20px; line-height: 1;
+    }
+    .dialog-body { padding: 18px 24px 24px; }
+    .detail-item { padding: 13px 0; border-bottom: 1px solid #edf0ec; }
+    .detail-item:last-child { border-bottom: 0; }
+    .detail-item strong { display: block; margin-bottom: 4px; }
+    .detail-item span { color: var(--muted); line-height: 1.55; }
+
+    @media (min-width: 1100px) and (min-height: 800px) {
+      .intro-card { min-height: 600px; }
+      .metric-card { min-height: 130px; }
+    }
+    @media (max-width: 1100px) {
+      .site-header { padding: 12px 20px; }
+      main { padding: 18px 20px; }
+      .cv-layout { grid-template-columns: minmax(0, 1.2fr) minmax(330px, .9fr); gap: 16px; }
+      .intro-card { padding: 28px 22px 22px; }
+      .role-line { display: none; }
+      .metric-card { padding: 15px; gap: 12px; }
+      .metric-top h2 { font-size: 22px; }
+      .metric-label { font-size: 9px; }
+      .software-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    }
+    @media (max-width: 760px) {
+      .site-header { align-items: flex-start; flex-direction: column; gap: 13px; padding: 14px 16px; }
+      .identity { width: 100%; }
+      .brand-name { font-size: 18px; }
+      .header-actions { width: 100%; flex-wrap: wrap; gap: 8px; }
+      .contact-pill { min-height: 34px; font-size: 12px; }
+      .resume-btn { min-height: 34px; }
+      main { padding: 14px 14px 18px; }
+      .cv-layout { grid-template-columns: 1fr; }
+      .intro-card { min-height: auto; padding: 25px 19px 19px; }
+      h1 { font-size: clamp(34px, 9vw, 46px); }
+      .intro-copy { font-size: 15px; line-height: 1.65; }
+      .software-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+      .software-card { min-height: 76px; }
+      .action-row { gap: 8px; }
+      .primary-action, .secondary-action { padding: 0 13px; font-size: 12px; }
+      .typing-speed { margin-left: 0; width: 100%; }
+      .metrics { grid-template-rows: auto; gap: 12px; }
+      .metric-card { min-height: 108px; }
+      footer { padding: 12px 16px; align-items: flex-start; flex-direction: column; }
+      .footer-note { text-align: left; }
+    }
+    @media (max-width: 390px) {
+      .contact-pill { max-width: 100%; overflow-wrap: anywhere; white-space: normal; }
+      .metric-top { align-items: flex-start; flex-direction: column; gap: 4px; }
+      .metric-label { text-align: left; }
+      .software-name { font-size: 11px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="identity">
+      <div class="monogram" aria-label="Fiza Batool initials">FB</div>
+      <div class="brand-name">Fiza Batool</div>
+      <div class="role-line">Computer Science Student <span class="dot">•</span> Accounts &amp; Financial Operations</div>
+    </div>
+
+    <div class="header-actions">
+      <div class="contact-pill location-pill" aria-label="Location">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg>
+        Lahore, Pakistan
+      </div>
+      <a class="contact-pill" href="mailto:fiza326batool@gmail.com" aria-label="Email Fiza Batool">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></svg>
+        fiza326batool@gmail.com
+      </a>
+      <!-- Replace resume.pdf with the actual path to your CV PDF. -->
+      <a class="resume-btn" href="resume.pdf" download>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m-5-5 5 5 5-5"/><path d="M4 17v3h16v-3"/></svg>
+        Resume
+      </a>
+    </div>
+  </header>
+
+  <main>
+    <div class="cv-layout">
+      <section class="intro-card" aria-labelledby="hero-title">
+        <div class="status-badge"><span class="status-dot"></span>Verified Qualifications &amp; Academic Track</div>
+
+        <h1 id="hero-title">Where Technology Meets <em>Business and Analytical Thinking.</em></h1>
+
+        <p class="intro-copy">
+          Computer Science student with practical experience in accounting, financial operations,
+          reporting, and client relations. Skilled in bridging analytical methodologies with
+          financial systems to deliver accurate ledgers, systematic audits, and streamlined operations.
+        </p>
+
+        <div class="divider"></div>
+        <p class="eyebrow">Core documented software stack</p>
+
+        <div class="software-grid" aria-label="Software skills">
+          <div class="software-card"><span class="software-icon excel">XL</span><span class="software-name">MS Excel</span></div>
+          <div class="software-card"><span class="software-icon word">W</span><span class="software-name">MS Word</span></div>
+          <div class="software-card"><span class="software-icon powerpoint">P</span><span class="software-name">PowerPoint</span></div>
+          <div class="software-card"><span class="software-icon quickbooks">QB</span><span class="software-name">QuickBooks</span></div>
+          <div class="software-card"><span class="software-icon caseware">CW</span><span class="software-name">CaseWare</span></div>
+          <div class="software-card"><span class="software-icon erp">ERP</span><span class="software-name">ERP Systems</span></div>
+        </div>
+
+        <div class="divider" style="margin-top: 17px;"></div>
+        <div class="action-row">
+          <button class="primary-action" id="experienceButton" type="button">
+            Inspect Experience Details
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <button class="secondary-action" id="projectButton" type="button">View Ranked Project</button>
+         
+        </div>
+      </section>
+
+      <aside class="metrics" aria-label="Professional highlights">
+        <article class="metric-card">
+          <div class="metric-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5c-.7-.8-1.7-1.2-3.1-1.2-1.6 0-2.7.8-2.7 1.9 0 3 5.8 1.1 5.8 4.2 0 1.2-1.2 2.1-3 2.1-1.3 0-2.5-.5-3.2-1.4M12 5.5v13"/></svg>
+          </div>
+          <div class="metric-content">
+            <div class="metric-top"><h2>3+ Years</h2><span class="metric-label">Verified timeline</span></div>
+            <p class="metric-description">Financial and Inventory Management Experience</p>
+            <p class="metric-detail">SBC Chemical Industries, Qarshi University &amp; Soft3m.</p>
+          </div>
+        </article>
+
+        <article class="metric-card">
+          <div class="metric-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 2 1.9 5.8L20 10l-6.1 2.2L12 18l-1.9-5.8L4 10l6.1-2.2L12 2Z"/><path d="m19 15 .9 2.1L22 18l-2.1.9L19 21l-.9-2.1L16 18l2.1-.9L19 15Z"/></svg>
+          </div>
+          <div class="metric-content">
+            <div class="metric-top"><h2>1st Place</h2><span class="metric-label">Class ranking</span></div>
+            <p class="metric-description">Academic Project Ranking</p>
+            <p class="metric-detail">Jauharabad Sugar Mill's organizational research analysis.</p>
+          </div>
+        </article>
+
+        <article class="metric-card">
+          <div class="metric-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.3"/><path d="M3 20v-1.5A5.5 5.5 0 0 1 8.5 13h1A5.5 5.5 0 0 1 15 18.5V20H3Z"/><path d="M15 14h1a4 4 0 0 1 4 4v2h-3"/></svg>
+          </div>
+          <div class="metric-content">
+            <div class="metric-top"><h2>Education</h2><span class="metric-label">Competitive</span></div>
+            <p class="metric-description">Academic_Tracking</p>
+            <p class="metric-detail">Pursuing my studies in Computer Science at Qarshi University, Lahore, developing my understanding of computing.</div>
+        </article>
+
+        <article class="metric-card">
+          <div class="metric-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3 2.7 5.5 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1-4.4-4.3 6.1-.9L12 3Z"/></svg>
+          </div>
+          <div class="metric-content">
+            <div class="metric-top"><h2> UI/UX Design</h2><span class="metric-label">Frontend</span></div>
+            <p class="metric-description">Project Presentation Rating</p>
+            <p class="metric-detail">Understanding user interface and user experience principles  &amp; to create intuitive layouts, maintain visual consistency.   </p>
+          </div>
+        </article>
+      </aside>
+    </div>
+  </main>
+
+  <footer>
+    <div><span class="footer-brand">FB</span> &nbsp;•&nbsp; © Fiza Batool 0326-3984189</div>
+    <div class="footer-note"></div> Non-scrolling Viewport &nbsp;•&nbsp; All Rights Reserved</div>
+  </footer>
+
+  <dialog id="experienceDialog">
+    <div class="dialog-head">
+      <div><h2>Professional Experience</h2><p>Summary of roles listed in the CV.</p></div>
+      <button class="close-btn" type="button" aria-label="Close dialog">×</button>
+    </div>
+    <div class="dialog-body">
+      <div class="detail-item"><strong>Manager — Accounts · Soban Chemical Industries</strong><span>July 2025 – Present. Accounting operations, ledger management, reconciliations, reporting, budgeting support, and tax documentation.</span></div>
+      <div class="detail-item"><strong>Intern — Account Assistant / Helper · Qarshi University</strong><span>June 2026 – Present, as listed in the resume. Student fee records, account reconciliation, voucher preparation, and database updates.</span></div>
+      <div class="detail-item"><strong>Accounts &amp; Client Relations Specialist · Soft3m Software House</strong><span>August 2022 – September 2024. Client payments, accounts receivable, billing follow-ups, and client/vendor communication.</span></div>
+      <p class="metric-detail">Note: the uploaded Soft3m employment certificate uses the title “Support Engineer”; confirm the correct title before publishing.</p>
+    </div>
+  </dialog>
+
+  <dialog id="projectDialog">
+    <div class="dialog-head">
+      <div><h2>Corporate Management &amp; Operations Analysis</h2><p>Jauharabad Sugar Mill (JSML), Pakistan</p></div>
+      <button class="close-btn" type="button" aria-label="Close dialog">×</button>
+    </div>
+    <div class="dialog-body">
+      <div class="detail-item"><strong>Role: Team Leader / Project Lead</strong><span>Led a seven-member team and coordinated tasks, interviews, and project deliverables.</span></div>
+      <div class="detail-item"><strong>Research and analysis</strong><span>Conducted structured interviews with management, designed questionnaires, and analyzed organizational operations, financial frameworks, and HR policies.</span></div>
+      <div class="detail-item"><strong>Documented result</strong><span>Ranked first in class with a 4.5/5.0 presentation rating, as stated in the resume.</span></div>
+    </div>
+  </dialog>
+
+  <script>
+    const experienceDialog = document.getElementById("experienceDialog");
+    const projectDialog = document.getElementById("projectDialog");
+
+    document.getElementById("experienceButton").addEventListener("click", () => {
+      experienceDialog.showModal();
+    });
+
+    document.getElementById("projectButton").addEventListener("click", () => {
+      projectDialog.showModal();
+    });
+
+    document.querySelectorAll("dialog .close-btn").forEach((button) => {
+      button.addEventListener("click", () => button.closest("dialog").close());
+    });
+
+    [experienceDialog, projectDialog].forEach((dialog) => {
+      dialog.addEventListener("click", (event) => {
+        if (event.target === dialog) dialog.close();
+      });
+    });
+  </script>
+</body>
+</html>
